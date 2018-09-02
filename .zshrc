@@ -37,10 +37,18 @@ zplug load
 bindkey '^R' fzf-history-widget
 
 # ctrl + space for auto suggest
-bindkey '^ ' autosuggest-accept
+bindkey '^ ' autosuggest-execute
 
 # enable ..<tab>
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 
 export PATH=~/.yarn/bin/:$PATH
 
+# executes commands from fzf history directly
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+
+zle     -N     fzf-history-widget-accept
+bindkey '^R' fzf-history-widget-accept
