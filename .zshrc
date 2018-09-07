@@ -1,3 +1,5 @@
+source ~/.dotfiles/work.zsh
+
 source ~/.zplug/init.zsh
 
 alias ls='ls --color=auto'
@@ -18,6 +20,7 @@ zplug "plugins/kubectl", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
+zplug "lib/clipboard", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug mafredri/zsh-async, from:github
 zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
@@ -52,3 +55,5 @@ fzf-history-widget-accept() {
 
 zle     -N     fzf-history-widget-accept
 bindkey '^R' fzf-history-widget-accept
+
+
