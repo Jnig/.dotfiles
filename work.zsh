@@ -2,7 +2,7 @@
 
 if ! pgrep -x "adfs-cli" > /dev/null
 then
-    rm ~/.aws/current_profile
+    rm ~/.aws/current_profile &> /dev/null
 fi
 export http_proxy=http://localhost:3128
 export https_proxy=http://localhost:3128
