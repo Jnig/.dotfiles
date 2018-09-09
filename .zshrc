@@ -1,4 +1,4 @@
-source ~/.dotfiles/work.zsh
+#source ~/.dotfiles/work.zsh
 
 source ~/.zplug/init.zsh
 
@@ -45,7 +45,7 @@ bindkey '^ ' autosuggest-execute
 # enable ..<tab>
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 
-export PATH=~/.yarn/bin/:$PATH
+export PATH=~/.yarn/bin/:~/.config/yarn/global/node_modules/.bin:$PATH
 
 # executes commands from fzf history directly
 fzf-history-widget-accept() {
