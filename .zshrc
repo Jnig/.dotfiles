@@ -1,4 +1,7 @@
-#source ~/.dotfiles/work.zsh
+if [ -f ~/.dotfiles/is_work ]; then
+  source ~/.dotfiles/work.zsh
+fi
+
 
 source ~/.zplug/init.zsh
 
