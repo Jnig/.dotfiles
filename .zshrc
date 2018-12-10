@@ -13,6 +13,12 @@ zplug "junegunn/fzf-bin", \
     rename-to:fzf, \
     use:"*linux*amd64*"
 
+zplug "ahmetb/kubectx", \
+    from:github, \
+    as:command, \
+    use:"{kubectx,kubens}"
+
+
 zplug zsh-users/zsh-syntax-highlighting, as:plugin, from:github
 zplug zsh-users/zsh-autosuggestions, as:plugin, from:github
 zplug "plugins/vscode", from:oh-my-zsh
@@ -59,4 +65,4 @@ fzf-history-widget-accept() {
 zle     -N     fzf-history-widget-accept
 bindkey '^R' fzf-history-widget-accept
 
-
+source <(kubectl completion zsh) .
