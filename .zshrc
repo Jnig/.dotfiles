@@ -8,7 +8,10 @@ autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 ### End of Zplugin's installer chunk
 
-### binaries 
+### programs
+zplugin ice wait"1" from"gh-r" as"program" bpick"*linux_amd64*" lucid
+zplugin light junegunn/fzf-bin
+
 zplugin ice wait"1" from"gh-r" as"program" mv"docker* -> docker-compose" lucid
 zplugin light docker/compose
 
@@ -23,10 +26,20 @@ zplugin snippet https://storage.googleapis.com/kubernetes-helm/helm-v2.14.0-linu
 
 zplugin ice wait"1" atclone"unzip -x terraform*" pick"terraform" as"program" lucid
 zplugin snippet https://releases.hashicorp.com/terraform/0.12.0/terraform_0.12.0_linux_amd64.zip
+
+zplugin ice wait"1" pick"kubens" as"program" lucid
+zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
+
+zplugin ice wait"1" pick"kubectx" as"program" lucid
+zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx
 ###
 
-zplugin ice pick"async.zsh" src"pure.zsh"
-zplugin light sindresorhus/pure
+#zplugin ice pick"async.zsh" src"pure.zsh"
+#zplugin light sindresorhus/pure
+
+zplugin ice from"gh"
+zplugin load denysdovhan/spaceship-prompt
+
 
 zplugin ice wait"0" blockf lucid
 zplugin light zsh-users/zsh-completions
