@@ -1,60 +1,41 @@
-if [ -f ~/.dotfiles/is_work ]; then
-  source ~/.dotfiles/work.zsh
-fi
+module_path+=( "/home/jakob/.zplugin/bin/zmodules/Src" )
+zmodload zdharma/zplugin
 
 
-source ~/.zplug/init.zsh
+### Added by Zplugin's installer
+source '/home/jakob/.zplugin/bin/zplugin.zsh'
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin's installer chunk
 
-alias ls='ls --color=auto'
+zplugin ice wait"1" from"gh-r" as"program" mv"docker* -> docker-compose" lucid
+zplugin light docker/compose
 
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*linux*amd64*"
+zplugin ice pick"async.zsh" src"pure.zsh"
+zplugin light sindresorhus/pure
 
-zplug "ahmetb/kubectx", \
-    from:github, \
-    as:command, \
-    use:"{kubectx,kubens}"
+zplugin ice wait"0" blockf lucid
+zplugin light zsh-users/zsh-completions
+
+zplugin ice wait"0" atload"_zsh_autosuggest_start" lucid
+zplugin light zsh-users/zsh-autosuggestions
+
+zplugin ice wait"0" atinit"zpcompinit; zpcdreplay" lucid
+zplugin light zdharma/fast-syntax-highlighting
+
+zplugin ice wait"0" lucid
+zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
+zplugin ice wait"0" lucid
+zplugin snippet OMZ::plugins/docker-compose/docker-compose.plugin.zsh
+
+zplugin ice svn lucid pick"" multisrc"{history,clipboard,correction,directories,functions,misc}.zsh" 
+zplugin snippet OMZ::lib
+
+zplugin ice pick"shell/key-bindings.zsh" 
+zplugin load junegunn/fzf
 
 
-zplug zsh-users/zsh-syntax-highlighting, as:plugin, from:github
-zplug zsh-users/zsh-autosuggestions, as:plugin, from:github
-zplug "plugins/vscode", from:oh-my-zsh
-zplug "plugins/terraform", from:oh-my-zsh
-zplug "plugins/yarn", from:oh-my-zsh
-zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "lib/history", from:oh-my-zsh
-zplug "lib/clipboard", from:oh-my-zsh
-zplug "plugins/vi-mode", from:oh-my-zsh
-zplug mafredri/zsh-async, from:github
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-zplug junegunn/fzf, use:"shell/*.zsh"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
-
-bindkey '^R' fzf-history-widget
-
-# ctrl + space for auto suggest
-bindkey '^ ' autosuggest-execute
-
-# enable ..<tab>
-zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
-
-export PATH=~/.yarn/bin/:~/.config/yarn/global/node_modules/.bin:$PATH
 
 # executes commands from fzf history directly
 fzf-history-widget-accept() {
@@ -63,6 +44,12 @@ fzf-history-widget-accept() {
 }
 
 zle     -N     fzf-history-widget-accept
-bindkey '^R' fzf-history-widget-accept
+bindkey '^R' fzf-history-widget
+bindkey '^ ' autosuggest-execute
+alias ls='ls --color=auto'
+alias  text-size='gsettings set org.gnome.desktop.interface text-scaling-factor '
 
-source <(kubectl completion zsh) .
+export NPM_PACKAGES="~/.npm-packages"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+
