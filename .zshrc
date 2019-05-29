@@ -34,11 +34,8 @@ zplugin ice wait"1" pick"kubectx" as"program" lucid
 zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx
 ###
 
-#zplugin ice pick"async.zsh" src"pure.zsh"
-#zplugin light sindresorhus/pure
-
-zplugin ice from"gh"
-zplugin load denysdovhan/spaceship-prompt
+zplugin ice pick"async.zsh" src"pure.zsh"
+zplugin light sindresorhus/pure
 
 
 zplugin ice wait"0" blockf lucid
