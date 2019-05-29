@@ -15,13 +15,13 @@ zplugin light docker/compose
 zplugin ice wait"1" from"gh-r" as"program" mv"cli-hasura-linux-amd64 -> hasura" lucid
 zplugin light hasura/graphql-engine
 
-zplugin ice pick"kubectl" as"program"
+zplugin ice wait"1" pick"kubectl" as"program" lucid
 zplugin snippet https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/linux/amd64/kubectl
 
-zplugin ice atclone"tar xfz helm*" pick"linux-amd64/helm" as"program"
+zplugin ice wait"1" atclone"tar xfz helm*" pick"linux-amd64/helm" as"program" lucid
 zplugin snippet https://storage.googleapis.com/kubernetes-helm/helm-v2.14.0-linux-amd64.tar.gz
 
-zplugin ice atclone"unzip -x terraform*" pick"terraform" as"program"
+zplugin ice wait"1" atclone"unzip -x terraform*" pick"terraform" as"program" lucid
 zplugin snippet https://releases.hashicorp.com/terraform/0.12.0/terraform_0.12.0_linux_amd64.zip
 ###
 
@@ -47,7 +47,7 @@ zplugin ice svn lucid pick"" multisrc"{history,clipboard,correction,directories,
 zplugin snippet OMZ::lib
 
 zplugin ice pick"shell/key-bindings.zsh" 
-zplugin load junegunn/fzf
+zplugin light junegunn/fzf
 
 
 
@@ -64,7 +64,5 @@ alias ls='ls --color=auto'
 alias scp='noglob scp'
 alias text-size='gsettings set org.gnome.desktop.interface text-scaling-factor '
 
-export NPM_PACKAGES="~/.npm-packages"
-export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
-export PATH="$NPM_PACKAGES/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
 

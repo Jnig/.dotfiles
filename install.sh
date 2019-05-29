@@ -5,3 +5,5 @@ ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 
 zplugin module build
+
+npm config set prefix ~/.npm
