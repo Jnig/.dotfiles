@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt instal gawk zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+rm ~/.vimrc ~/.zshrc
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 
