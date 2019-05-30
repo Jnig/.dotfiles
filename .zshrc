@@ -1,9 +1,9 @@
-module_path+=( "/home/jakob/.zplugin/bin/zmodules/Src" )
+module_path+=( "/home/$HOME/.zplugin/bin/zmodules/Src" )
 zmodload zdharma/zplugin
 
 
 ### Added by Zplugin's installer
-source '/home/jakob/.zplugin/bin/zplugin.zsh'
+source "$HOME/.zplugin/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 ### End of Zplugin's installer chunk
