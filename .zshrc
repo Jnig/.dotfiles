@@ -36,9 +36,11 @@ zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx
 
 #zplugin ice pick"async.zsh" src"pure.zsh"
 #zplugin light sindresorhus/pure
+zplugin snippet ~/.dotfiles/purepower 
+
 zplugin ice from"gh"
 zplugin load romkatv/powerlevel10k
-zplugin snippet https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower
+
 
 
 zplugin ice wait"0" blockf lucid
