@@ -1,4 +1,4 @@
-module_path+=( "/home/$HOME/.zplugin/bin/zmodules/Src" )
+module_path+=( "$HOME/.zplugin/bin/zmodules/Src" )
 zmodload zdharma/zplugin
 
 
