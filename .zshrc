@@ -45,7 +45,6 @@ zplugin ice from"gh"
 zplugin load romkatv/powerlevel10k
 
 
-
 zplugin ice wait"0" blockf lucid
 zplugin light zsh-users/zsh-completions
 
@@ -67,6 +66,9 @@ zplugin snippet OMZ::lib
 zplugin ice pick"shell/key-bindings.zsh" 
 zplugin light junegunn/fzf
 
+export ZSH_CACHE_DIR="${TMPDIR:-/tmp}"
+zplugin ice wait"" svn lucid atinit"zpcompinit; zpcdreplay"
+zplugin snippet OMZ::plugins/kubectl
 
 
 # executes commands from fzf history directly
@@ -83,4 +85,3 @@ alias scp='noglob scp'
 alias text-size='gsettings set org.gnome.desktop.interface text-scaling-factor '
 
 export PATH="$HOME/.npm/bin:$PATH"
-

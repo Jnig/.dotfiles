@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo apt install gawk zsh subversion
+sudo apt instal gawk zsh subversion
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 rm ~/.vimrc ~/.zshrc
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
