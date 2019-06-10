@@ -32,6 +32,9 @@ zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
 
 zplugin ice wait"1" pick"kubectx" as"program" lucid
 zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx
+
+zplugin ice wait"1" from"gh-r" as"program" mv"fx-linux -> fx" lucid
+zplugin light antonmedv/fx
 ###
 
 #zplugin ice pick"async.zsh" src"pure.zsh"
