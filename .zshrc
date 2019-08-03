@@ -25,7 +25,7 @@ zplugin ice wait"1" atclone"tar xfz helm*" pick"linux-amd64/helm" as"program" lu
 zplugin snippet https://storage.googleapis.com/kubernetes-helm/helm-v2.14.0-linux-amd64.tar.gz
 
 zplugin ice wait"1" atclone"unzip -x terraform*" pick"terraform" as"program" lucid
-zplugin snippet https://releases.hashicorp.com/terraform/0.12.0/terraform_0.12.0_linux_amd64.zip
+zplugin snippet https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip
 
 zplugin ice wait"1" pick"kubens" as"program" lucid
 zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
@@ -67,7 +67,7 @@ zplugin ice pick"shell/key-bindings.zsh"
 zplugin light junegunn/fzf
 
 export ZSH_CACHE_DIR="${TMPDIR:-/tmp}"
-zplugin ice wait"" svn lucid atinit"zpcompinit; zpcdreplay"
+zplugin ice wait"" svn lucid atinit"zpcompinit; zpcdreplay" silent
 zplugin snippet OMZ::plugins/kubectl
 
 
@@ -85,3 +85,5 @@ alias scp='noglob scp'
 alias text-size='gsettings set org.gnome.desktop.interface text-scaling-factor '
 
 export PATH="$HOME/.npm/bin:$PATH"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
