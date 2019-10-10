@@ -1,12 +1,7 @@
-module_path+=( "$HOME/.zplugin/bin/zmodules/Src" )
-zmodload zdharma/zplugin
+source ~/.zplugin/bin/zplugin.zsh
 
-
-### Added by Zplugin's installer
-source "$HOME/.zplugin/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
 
 ### programs
 zplugin ice wait"1" from"gh-r" as"program" bpick"*linux_amd64*" lucid
@@ -37,13 +32,8 @@ zplugin ice wait"1" from"gh-r" as"program" mv"fx-linux -> fx" lucid
 zplugin light antonmedv/fx
 ###
 
-#zplugin ice pick"async.zsh" src"pure.zsh"
-#zplugin light sindresorhus/pure
-zplugin snippet ~/.dotfiles/purepower 
-
 zplugin ice from"gh"
 zplugin load romkatv/powerlevel10k
-
 
 zplugin ice wait"0" blockf lucid
 zplugin light zsh-users/zsh-completions
