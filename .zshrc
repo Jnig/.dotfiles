@@ -20,7 +20,10 @@ zplugin ice wait"1" atclone"tar xfz helm*" pick"linux-amd64/helm" as"program" lu
 zplugin snippet https://storage.googleapis.com/kubernetes-helm/helm-v2.14.0-linux-amd64.tar.gz
 
 zplugin ice wait"1" atclone"unzip -x terraform*" pick"terraform" as"program" lucid
-zplugin snippet https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip
+zplugin snippet https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip
+
+zplugin ice wait"1" from"gh-r" as"program" bpick"*linux_amd64*" mv"terragrunt_linux_amd64 -> terragrunt" lucid
+zplugin light gruntwork-io/terragrunt
 
 zplugin ice wait"1" pick"kubens" as"program" lucid
 zplugin snippet https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
