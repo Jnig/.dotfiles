@@ -35,8 +35,8 @@ zplugin ice wait"1" from"gh-r" as"program" mv"fx-linux -> fx" lucid
 zplugin light antonmedv/fx
 ###
 
-zplugin ice from"gh"
-zplugin load romkatv/powerlevel10k
+zplugin ice depth=1
+zplugin light romkatv/powerlevel10k
 
 zplugin ice wait"0" blockf lucid
 zplugin light zsh-users/zsh-completions
