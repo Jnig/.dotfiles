@@ -1,0 +1,21 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty it self.
+env:
+  TERM: xterm-256color
+
+#colors:
+#  primary:
+#    background: '#2c2c2c'
+
+
+background_opacity: 1
+
+selection:
+  save_to_clipboard: true
+
+font:
+  normal:
+    family: "MesloLGS NF"
