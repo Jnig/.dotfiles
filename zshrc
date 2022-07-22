@@ -41,6 +41,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
 zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+zstyle ':z4h:ssh-agent:' start yes
 
 # Clone additional Git repositories from GitHub.
 #
@@ -56,7 +57,7 @@ z4h install ohmyzsh/ohmyzsh || return
 z4h init || return
 
 # Extend PATH.
-path=(~/bin $path)
+path=(~/bin ~/.npm/bin/ $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
@@ -104,3 +105,15 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
 # custom 
 bindkey '^ ' autosuggest-accept
+export _JAVA_AWT_WM_NONREPARENTING=1
+export XDG_CONFIG_HOME="$HOME/.config"
+export DOCKER_BUILDKIT=1
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+export PNPM_HOME="/home/jakob/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/jakob/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
