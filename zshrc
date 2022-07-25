@@ -23,10 +23,6 @@ if [[ ! -e ~/.zsh/fzf-zsh-plugin ]]; then
   git clone --depth=1 git@github.com:unixorn/fzf-zsh-plugin.git ~/.zsh/fzf-zsh-plugin
 fi
 
-if [[ ! -e ~/.zsh/ssh-agent.plugin.zsh ]]; then
-  wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/ssh-agent/ssh-agent.plugin.zsh -O ~/.zsh/ssh-agent.plugin.zsh
-fi
-
 # Activate Powerlevel10k Instant Prompt. 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -45,7 +41,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.p10k.zsh
 source ~/.zsh/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
-source ~/.zsh/ssh-agent.plugin.zsh
 
 
 # custom
