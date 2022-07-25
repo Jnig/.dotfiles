@@ -1,109 +1,54 @@
-# Personal Zsh configuration file. It is strongly recommended to keep all
-# shell customization and configuration (including exported environment
-# variables such as PATH) in this file or in files sourced from it.
-#
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+function zcompile-many() {
+  local f
+  for f; do zcompile -R -- "$f".zwc "$f"; done
+}
 
-# Periodic auto-update on Zsh startup: 'ask' or 'no'.
-# You can manually run `z4h update` to update everything.
-zstyle ':z4h:' auto-update      'no'
-# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:' auto-update-days '28'
+# Clone and compile to wordcode missing plugins.
+if [[ ! -e ~/.zsh/fast-syntax-highlighting ]]; then
+  git clone --depth=1 https://github.com/zdharma-continuum/fast-syntax-highlighting.git ~/.zsh/fast-syntax-highlighting
+  mv -- ~/.zsh/fast-syntax-highlighting/{'→chroma','tmp'}
+  zcompile-many ~/.zsh/fast-syntax-highlighting/{fast*,.fast*,**/*.ch,**/*.zsh}
+  mv -- ~/.zsh/fast-syntax-highlighting/{'tmp','→chroma'}
+fi
+if [[ ! -e ~/.zsh/zsh-autosuggestions ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
+  zcompile-many ~/.zsh/zsh-autosuggestions/{zsh-autosuggestions.zsh,src/**/*.zsh}
+fi
+if [[ ! -e ~/.zsh/powerlevel10k ]]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh/powerlevel10k
+  make -C ~/.zsh/powerlevel10k pkg
+fi
 
-# Move prompt to the bottom when zsh starts and on Ctrl+L.
-zstyle ':z4h:' prompt-at-bottom 'yes'
+if [[ ! -e ~/.zsh/fzf-zsh-plugin ]]; then
+  git clone --depth=1 git@github.com:unixorn/fzf-zsh-plugin.git ~/.zsh/fzf-zsh-plugin
+fi
 
-# Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey' keyboard  'pc'
+if [[ ! -e ~/.zsh/ssh-agent.plugin.zsh ]]; then
+  wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/ssh-agent/ssh-agent.plugin.zsh -O ~/.zsh/ssh-agent.plugin.zsh
+fi
 
-# Mark up shell's output with semantic information.
-zstyle ':z4h:' term-shell-integration 'yes'
+# Activate Powerlevel10k Instant Prompt. 
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Right-arrow key accepts one character ('partial-accept') from
-# command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char 'accept'
+# Enable the "new" completion system (compsys).
+autoload -Uz compinit && compinit
+[[ ~/.zcompdump.zwc -nt ~/.zcompdump ]] || zcompile-many ~/.zcompdump
+unfunction zcompile-many
 
-# Recursively traverse directories when TAB-completing files.
-zstyle ':z4h:fzf-complete' recurse-dirs 'no'
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-# Enable direnv to automatically source .envrc files.
-zstyle ':z4h:direnv'         enable 'no'
-# Show "loading" and "unloading" notifications from direnv.
-zstyle ':z4h:direnv:success' notify 'yes'
+# Load plugins.
+source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.p10k.zsh
+source ~/.zsh/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+source ~/.zsh/ssh-agent.plugin.zsh
 
-# Enable ('yes') or disable ('no') automatic teleportation of z4h over
-# SSH when connecting to these hosts.
-zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
-zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
-# The default value if none of the overrides above match the hostname.
-zstyle ':z4h:ssh:*'                   enable 'no'
 
-# Send these files over to the remote host when connecting over SSH to the
-# enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
-zstyle ':z4h:ssh-agent:' start yes
-
-# Clone additional Git repositories from GitHub.
-#
-# This doesn't do anything apart from cloning the repository and keeping it
-# up-to-date. Cloned files can be used after `z4h init`. This is just an
-# example. If you don't plan to use Oh My Zsh, delete this line.
-z4h install ohmyzsh/ohmyzsh || return
-
-# Install or update core components (fzf, zsh-autosuggestions, etc.) and
-# initialize Zsh. After this point console I/O is unavailable until Zsh
-# is fully initialized. Everything that requires user interaction or can
-# perform network I/O must be done above. Everything else is best done below.
-z4h init || return
-
-# Extend PATH.
-path=(~/bin ~/.npm/bin/ $path)
-
-# Export environment variables.
-export GPG_TTY=$TTY
-
-# Source additional local files if they exist.
-z4h source ~/.env.zsh
-
-# Use additional Git repositories pulled in with `z4h install`.
-#
-# This is just an example that you should delete. It does nothing useful.
-z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
-z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
-
-# Define key bindings.
-z4h bindkey z4h-backward-kill-word  Ctrl+Backspace     Ctrl+H
-z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
-
-z4h bindkey undo Ctrl+/ Shift+Tab # undo the last command line change
-z4h bindkey redo Alt+/            # redo the last undone command line change
-
-z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
-z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
-z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
-z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
-
-# Autoload functions.
-autoload -Uz zmv
-
-# Define functions and completions.
-function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
-compdef _directories md
-
-# Define named directories: ~w <=> Windows home directory on WSL.
-[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
-
-# Define aliases.
-alias tree='tree -a -I .git'
-
-# Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
-
-# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
-setopt glob_dots     # no special treatment for file names with a leading dot
-setopt no_auto_menu  # require an extra TAB press to open the completion menu
-
-# custom 
+# custom
 bindkey '^ ' autosuggest-accept
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -113,7 +58,7 @@ export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 export PNPM_HOME="/home/jakob/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# pnpm
-export PNPM_HOME="/home/jakob/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+
+# Add flags to existing aliases.
+alias ls="${aliases[ls]:-ls} -A"
+
