@@ -20,7 +20,7 @@ if [[ ! -e ~/.zsh/powerlevel10k ]]; then
 fi
 
 if [[ ! -e ~/.zsh/fzf-zsh-plugin ]]; then
-  git clone --depth=1 git@github.com:unixorn/fzf-zsh-plugin.git ~/.zsh/fzf-zsh-plugin
+  git clone --depth=1 https://github.com/unixorn/fzf-zsh-plugin.git  ~/.zsh/fzf-zsh-plugin
 fi
 
 # Activate Powerlevel10k Instant Prompt. 
