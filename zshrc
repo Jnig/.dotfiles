@@ -55,5 +55,8 @@ export PATH="$PNPM_HOME:$PATH"
 
 
 # Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
-
+alias ls="exa"
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"

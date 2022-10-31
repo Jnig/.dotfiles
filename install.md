@@ -6,3 +6,10 @@ wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20I
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 sudo mv *.ttf /usr/share/fonts/
 ```
+
+# links
+```
+ln -s ~/.dotfiles/nvim/ ~/.config/nvim/
+ln -s ~/.dotfiles/zshrc ~/.zshrc
+ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+```
