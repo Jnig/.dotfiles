@@ -42,6 +42,11 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.p10k.zsh
 source ~/.zsh/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
+# history
+setopt share_history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
 # custom
 bindkey '^ ' autosuggest-accept

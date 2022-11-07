@@ -53,6 +53,7 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use 'nvim-telescope/telescope-ui-select.nvim'
 
   use 'jose-elias-alvarez/null-ls.nvim'
 
@@ -64,7 +65,6 @@ return require('packer').startup(function(use)
   use {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    'lukas-reineke/lsp-format.nvim',
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-buffer',
@@ -77,6 +77,8 @@ return require('packer').startup(function(use)
     'RRethy/vim-illuminate'
   }
 
+  use 'kazhala/close-buffers.nvim'
+  use 'folke/which-key.nvim'
 
   -- My plugins here
   -- use 'foo1/bar1.nvim'

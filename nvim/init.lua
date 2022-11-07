@@ -1,3 +1,4 @@
+
 require('impatient')
 
 
@@ -27,3 +28,4 @@ require('plugins/telescope')
 require('plugins/toggleterm')
 require('plugins/tokyonight')
 require('plugins/treesitter')
+require('plugins/whichkey')
