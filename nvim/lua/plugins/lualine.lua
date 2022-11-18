@@ -1,5 +1,6 @@
-require('lualine').setup({
-  options = {
-    theme = 'tokyonight'
-  }
+require("lualine").setup({
+	options = {
+		theme = "tokyonight",
+	},
+	extensions = { "neo-tree" },
 })
