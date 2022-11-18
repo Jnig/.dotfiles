@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+# Determine colors from base16-shell
+# BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
+# FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
+BG=0xd924283b
+FG=0xffcfc9c2
+
+PLUGINS="$HOME/.config/sketchybar/plugins"
+
+# Bar
+sketchybar --bar     \
+  position=top       \
+  height=25          \
+  margin=10           \
+  y_offset=6 \
+  corner_radius=10   \
+  border_width=2     \
+  border_color=0xff2a2f38   \
+  blur_radius=0      \
+  padding_left=16    \
+  padding_right=16   \
+  color=$BG          \
+  display=all        \
+  hidden=off         \
+  topmost=off        \
+  font_smoothing=off \
+  shadow=off         \
+  sticky=on
+
+# Global defaults
+sketchybar --default \
+  updates=when_shown \
+  drawing=on         \
+
+# Label Defaults
+sketchybar --default                       \
+  label.font="FiraCode Nerd Font:Bold:12.0" \
+  label.color=$FG                          \
+  label.highlight_color=$FG                \
+  label.padding_left=4                     \
+  label.padding_right=4                    \
+  label.y_offset=0
+
+# Icon Defaults
+sketchybar --default                      \
+  icon.font="FiraCode Nerd Font:Bold:12.0" \
+  icon.y_offset=1
+
+# Background Defaults
+sketchybar --default          \
+  background.height=32        \
+  background.border_color=$BG \
+  background.border_width=0   \
+  background.corner_radius=0  \
+  background.color=$BG        \
+  background.drawing=off
+
+# Spaces
+SPACE_ICONS=($(yabai -m query --spaces | jq -r  '.[]|.label' | tr '\n' ' ' | tr -d '.space'))
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid=$(($i+1))
+  sketchybar --add space space.$sid left                                 \
+             --set space.$sid associated_space=$sid                      \
+                              icon=${SPACE_ICONS[i]}                     \
+                              icon.padding_left=4 \
+                              icon.padding_right=4 \
+                              icon.highlight_color=0xff2ac3de            \
+                              label.drawing=off                          \
+                              script="$PLUGINS/space.sh"              \
+                              click_script="yabai -m space --focus $sid"
+done
+
+
+
+# Right Items
+sketchybar --default             \
+  label.padding_left=0           \
+  label.padding_right=0          \
+  icon.padding_left=20           \
+  icon.padding_right=8           \
+  --add item clock right         \
+  --set clock                    \
+    update_freq=10               \
+    script="$PLUGINS/clock.sh"   \
+    icon=                       \
+    icon.color=0xff8fbcbb        \
+  --add item date right          \
+  --set date                     \
+    update_freq=100              \
+    script="$PLUGINS/date.sh"    \
+    icon=                       \
+    icon.color=0xffb48ead        \
+  --add item battery right       \
+  --set battery                  \
+    update_freq=3                \
+    script="$PLUGINS/power.sh"   \
+    icon=                       \
+    icon.color=0xffbf616a        \
+  --add item sound right         \
+  --set sound                    \
+    update_freq=5                \
+    icon.color=0xff5e81ac        \
+    script="$PLUGINS/sound.sh"   \
+  --add item wifi right          \
+  --set wifi                     \
+    script="$PLUGINS/wifi.sh"    \
+    update_freq=5                \
+
+sketchybar --update && echo "sketchybar configuration loaded.."
