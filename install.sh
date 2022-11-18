@@ -1,8 +1,40 @@
+#!/bin/bash
 
-ln -s ~/.dotfiles/config/alacritty ~/.config/alacritty
-ln -s ~/.dotfiles/config/nvim ~/.config/nvim
-ln -s ~/.dotfiles/config/karabiner ~/.config/karabiner
-ln -s ~/.dotfiles/config/skhd ~/.config/skhd
-ln -s ~/.dotfiles/config/yabai ~/.config/yabai
-ln -s ~/.dotfiles/config/sketchybar ~/.config/sketchybar
+ln -sfn ~/.dotfiles/zshrc ~/.zshrc
+ln -sfn ~/.dotfiles/p10k.zsh ~/.p10k.zsh
+ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
+ln -sfn ~/.dotfiles/config/alacritty ~/.config/alacritty
+ln -sfn ~/.dotfiles/config/nvim ~/.config/nvim
+ln -sfn ~/.dotfiles/config/karabiner ~/.config/karabiner
+ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
+ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
+ln -sfn ~/.dotfiles/config/sketchybar ~/.config/sketchybar
+
+
+brew install --cask \
+  alacritty \
+  font-fira-code-nerd-font \
+  font-hack-nerd-font \
+  font-iosevka-nerd-font \
+  karabiner-elements \
+  google-chrome \
+  obsidian
+
+brew install  \
+	exa \
+  jq \
+	fzf \
+  wget \
+  curl \
+  cmake \
+  git \
+  neovim \
+  stylua \
+  htop \
+  node \
+  tmux \
+  yabai \
+  sketchybar \
+  skhd \
+  et
