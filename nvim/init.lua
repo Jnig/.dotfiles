@@ -1,31 +1,30 @@
-
-require('impatient')
-
+require("impatient")
 
 function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-require('packer_init')
+require("packer_init")
 
-require('core/autocmd')
-require('core/options')
-require('core/mappings')
-require('lsp')
+require("core/autocmd")
+require("core/options")
+require("core/mappings")
+require("lsp")
 
-require('plugins/bufferline')
-require('plugins/cmp')
-require('plugins/indent-blankline')
-require('plugins/null-ls')
+require("plugins/bufferline")
+require("plugins/cmp")
+require("plugins/indent-blankline")
+require("plugins/null-ls")
 
-require('plugins/nvim-tree')
-require('plugins/lualine')
-require('plugins/telescope')
-require('plugins/toggleterm')
-require('plugins/tokyonight')
-require('plugins/treesitter')
-require('plugins/whichkey')
+-- require('plugins/nvim-tree')
+require("plugins/neo-tree")
+require("plugins/lualine")
+require("plugins/telescope")
+require("plugins/toggleterm")
+require("plugins/tokyonight")
+require("plugins/treesitter")
+require("plugins/whichkey")

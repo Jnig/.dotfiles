@@ -30,7 +30,14 @@ return require('packer').startup(function(use)
     config = function() require('nvim-web-devicons').setup() end
   }
 
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    }
+  }
 
   use { 'nvim-lualine/lualine.nvim' }
 

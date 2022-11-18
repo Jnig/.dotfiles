@@ -1,7 +1,8 @@
 vim.opt.termguicolors = true
-require("bufferline").setup {
-  options = {
-    show_buffer_icons = true,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-  }
-}
+
+require("bufferline").setup({
+	options = {
+		show_buffer_icons = true,
+		offsets = { { filetype = "neo-tree", text = "", padding = 1 } },
+	},
+})
