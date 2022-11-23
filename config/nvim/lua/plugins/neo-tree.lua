@@ -10,4 +10,11 @@ neotree.setup({
 		winbar = true,
 		statusline = false,
 	},
+	filesystem = {
+		follow_current_file = true,
+		use_libuv_file_watcher = true,
+	},
+	window = {
+		width = 50,
+	},
 })
