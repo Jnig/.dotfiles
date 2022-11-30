@@ -11,6 +11,9 @@ ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
 ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
 ln -sfn ~/.dotfiles/config/sketchybar ~/.config/sketchybar
 
+brew tap homebrew/cask-fonts
+brew tap FelixKratz/formulae
+
 
 brew install --cask \
   alacritty \
@@ -37,4 +40,4 @@ brew install  \
   yabai \
   sketchybar \
   skhd \
-  et
+  MisterTea/et/et
