@@ -173,5 +173,3 @@ cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 cmd - q: yabai -m window --close
 cmd - s: pmset displaysleepnow
 cmd - e: test "$(yabai -m  query --spaces --space | jq -r '.type')" = "bsp" && yabai -m space --layout stack || yabai -m space --layout bsp
-cmd - d: ~/.dotfiles/bin/popup.sh ~/.dotfiles/bin/launcher.sh
-
