@@ -9,16 +9,14 @@ fi
 
 function setup_space {
   local idx="$1"
-  local name="$2"
-  local display="$3"
+  local display="$2"
 
   local space=
-  space=$(yabai -m query --spaces --space "$name")
+  space=$(yabai -m query --spaces --space "$idx")
   if [ -z "$space" ]; then
     yabai -m space --create
   fi
 
-  yabai -m space "$idx" --move "$idx"
   yabai -m space "$idx" --display "$display"
 }
 
