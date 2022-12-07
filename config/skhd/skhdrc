@@ -149,15 +149,15 @@ cmd - j: yabai -m window --focus south
 cmd - k: yabai -m window --focus north
 cmd - l: yabai -m window --focus east || yabai -m window --focus stack.next
 
-cmd - 1 : yabai -m space --focus space.1
-cmd - 2 : yabai -m space --focus space.2
-cmd - 3 : yabai -m space --focus space.3
-cmd - 4 : yabai -m space --focus space.4
-cmd - 5 : yabai -m space --focus space.5
-cmd - 6 : yabai -m space --focus space.6
-cmd - 7 : yabai -m space --focus space.7
-cmd - 8 : yabai -m space --focus space.8
-cmd - 9 : yabai -m space --focus space.9
+cmd - 1 : yabai -m space --focus 1
+cmd - 2 : yabai -m space --focus 2
+cmd - 3 : yabai -m space --focus 3
+cmd - 4 : yabai -m space --focus 4
+cmd - 5 : yabai -m space --focus 5
+cmd - 6 : yabai -m space --focus 6
+cmd - 7 : yabai -m space --focus 7
+cmd - 8 : yabai -m space --focus 8
+cmd - 9 : yabai -m space --focus 9
 
 cmd + shift - 1 : yabai -m window --space 1; yabai -m space --focus 1
 cmd + shift - 2 : yabai -m window --space 2; yabai -m space --focus 2
@@ -171,5 +171,5 @@ cmd + shift - 9 : yabai -m window --space 9; yabai -m space --focus 9
 
 cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 cmd - q: yabai -m window --close
-cmd - s: pmset displaysleepnow
+cmd - s: osascript -e 'tell application "System Events" to keystroke "q" using {command down,control down}'
 cmd - e: test "$(yabai -m  query --spaces --space | jq -r '.type')" = "bsp" && yabai -m space --layout stack || yabai -m space --layout bsp

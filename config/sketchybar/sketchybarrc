@@ -57,7 +57,7 @@ sketchybar --default          \
   background.drawing=off
 
 # Spaces
-SPACE_ICONS=($(yabai -m query --spaces | jq -r  '.[]|.label' | tr '\n' ' ' | tr -d '.space'))
+SPACE_ICONS=($(yabai -m query --spaces | jq -r  '.[]|.index' | tr '\n' ' ' | tr -d '.space'))
 for i in "${!SPACE_ICONS[@]}"
 do
   sid=$(($i+1))
