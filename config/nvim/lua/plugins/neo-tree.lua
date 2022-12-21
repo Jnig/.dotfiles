@@ -15,6 +15,12 @@ neotree.setup({
 		use_libuv_file_watcher = true,
 	},
 	window = {
-		width = 50,
+		width = 40,
+	},
+	default_component_configs = {
+		indent = {
+			indent_size = 2,
+			padding = 0,
+		},
 	},
 })
