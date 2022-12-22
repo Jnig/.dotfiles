@@ -40,4 +40,5 @@ else
   setup_space 7 1
 fi
 
+sleep 2
 brew services restart sketchybar

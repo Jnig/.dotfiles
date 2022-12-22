@@ -25,9 +25,10 @@ brew install --cask \
   obsidian
 
 brew install  \
-	exa \
+  exa \
   jq \
-	fzf \
+  fzf \
+  ripgrep \
   wget \
   curl \
   cmake \

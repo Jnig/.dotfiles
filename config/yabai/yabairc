@@ -42,13 +42,13 @@ yabai -m config external_bar               all:30:0     \
 yabai -m config layout bsp
 
 
-yabai -m space 1 --label space.1
-yabai -m space 2 --label space.2
-yabai -m space 3 --label space.3
-yabai -m space 4 --label space.4
-yabai -m space 5 --label space.5
-yabai -m space 6 --label space.6
-yabai -m space 7 --label space.7
+yabai -m space 1
+yabai -m space 2
+yabai -m space 3
+yabai -m space 4
+yabai -m space 5
+yabai -m space 6
+yabai -m space 7
 
 
 
@@ -63,7 +63,7 @@ yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yab
 yabai -m rule --add title='mylauncher' manage=off sticky=on layer=above border=off
 yabai -m rule --add app="^VLC$" border=off
 yabai -m rule --add app="^System Preferences$" layer=above manage=off
-yabai -m rule --add app="^Obsidian$" space=space.3
+yabai -m rule --add app="^Obsidian$" space=5
 
 # yabai -m rule --add app!="^(Google Chrome|Obsidian|Finder|Alacritty)$" manage=off
 
