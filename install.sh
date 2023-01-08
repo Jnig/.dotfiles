@@ -22,7 +22,8 @@ brew install --cask \
   font-iosevka-nerd-font \
   karabiner-elements \
   google-chrome \
-  obsidian
+  obsidian \
+  spaceid
 
 brew install  \
   exa \

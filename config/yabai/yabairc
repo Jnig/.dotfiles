@@ -14,7 +14,7 @@ yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yab
 yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
 
-yabai -m config external_bar               all:30:0     \
+yabai -m config external_bar               off:0:0     \
                 window_border              on           \
                 mouse_follows_focus         on           \
                 focus_follows_mouse         autoraise    \

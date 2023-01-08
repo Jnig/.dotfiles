@@ -39,6 +39,3 @@ else
   setup_space 6 1
   setup_space 7 1
 fi
-
-
-sketchybar --update
