@@ -1,6 +1,8 @@
 [Unit]
 Description=Eternal Terminal
-After=syslog.target network.target[Service]
+After=syslog.target network.target
+
+[Service]
 Type=simple
 Restart=on-failure
 ExecStart=/home/linuxbrew/.linuxbrew/bin/etserver
