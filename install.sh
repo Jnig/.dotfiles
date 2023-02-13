@@ -10,7 +10,7 @@ ln -sfn ~/.dotfiles/config/karabiner ~/.config/karabiner
 ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
 ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
 
-ln -sfn ~/.dotfiles/lssh/rc  ~/.ssh/
+ln -sfn ~/.dotfiles/ssh/rc  ~/.ssh/
 
 
 brew install  \
