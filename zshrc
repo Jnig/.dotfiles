@@ -41,12 +41,8 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.p10k.zsh
 source ~/.zsh/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+source ~/.zsh/ssh.zsh
 
-# ssh agent
-ssh-add -l &> /dev/null
-if [ $? -eq 1 ]; then
-  ssh-add
-fi
 
 
 # history
