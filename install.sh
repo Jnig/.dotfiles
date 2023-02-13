@@ -9,21 +9,9 @@ ln -sfn ~/.dotfiles/config/nvim ~/.config/nvim
 ln -sfn ~/.dotfiles/config/karabiner ~/.config/karabiner
 ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
 ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
-ln -sfn ~/.dotfiles/config/sketchybar ~/.config/sketchybar
 
-brew tap homebrew/cask-fonts
-brew tap FelixKratz/formulae
+ln -sfn ~/.dotfiles/lssh/rc  ~/.ssh/
 
-
-brew install --cask \
-  alacritty \
-  font-fira-code-nerd-font \
-  font-hack-nerd-font \
-  font-iosevka-nerd-font \
-  karabiner-elements \
-  google-chrome \
-  obsidian \
-  spaceid
 
 brew install  \
   exa \
@@ -40,6 +28,18 @@ brew install  \
   node \
   tmux \
   yabai \
-  sketchybar \
   skhd \
   MisterTea/et/et
+
+brew tap homebrew/cask-fonts
+
+brew install --cask \
+  alacritty \
+  font-fira-code-nerd-font \
+  font-hack-nerd-font \
+  font-iosevka-nerd-font \
+  karabiner-elements \
+  google-chrome \
+  obsidian \
+  spaceid
+
