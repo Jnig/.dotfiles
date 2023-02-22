@@ -30,7 +30,8 @@ brew install  \
   tmux \
   yabai \
   skhd \
-  MisterTea/et/et
+  MisterTea/et/et \
+  python3
 
 brew tap homebrew/cask-fonts
 
