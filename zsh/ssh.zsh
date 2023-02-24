@@ -4,8 +4,8 @@ if [ $? -eq 1 ]; then
   ssh-add
 fi
 
-# create stavble ssh_auth_sock location for tmux
-if test "$SSH_AUTH_SOCK" ; then
+# create stable ssh_auth_sock location for tmux
+if  [[ -n "$SSH_AUTH_SOCK" ]] && [[ "$SSH_AUTH_SOCK" != *ssh_auth_sock ]]; then
   ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
