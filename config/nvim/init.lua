@@ -1,5 +1,3 @@
-require("impatient")
-
 function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
 	if opts then
@@ -8,7 +6,8 @@ function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-require("packer_init")
+require("lazy_init")
+require("impatient")
 
 require("core/autocmd")
 require("core/options")
