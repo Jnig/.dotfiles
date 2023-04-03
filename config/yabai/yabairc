@@ -11,7 +11,7 @@ yabai -m signal --add event=display_added action="sleep 1 && $HOME/.config/yabai
 yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yabai/spaces.sh"
 
 # focus on space change
-yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus recent || yabai -m window --focus first"
 
 
 yabai -m config external_bar               off:0:0     \
