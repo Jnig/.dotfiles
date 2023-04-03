@@ -70,4 +70,16 @@ require("lazy").setup({
 	"RRethy/vim-illuminate",
 	"kazhala/close-buffers.nvim",
 	"folke/which-key.nvim",
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	},
 })
