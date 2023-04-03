@@ -2,9 +2,10 @@ local servers = {
 	"lua_ls",
 	--  "tsserver",
 	"volar",
-	-- "bashls",
+	"bashls",
 	"jsonls",
-	-- "yamlls",
+	"yamlls",
+	"pylsp",
 }
 
 require("mason").setup()

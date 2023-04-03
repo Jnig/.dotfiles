@@ -32,7 +32,8 @@ brew install  \
   yabai \
   skhd \
   MisterTea/et/et \
-  python3
+  python3 \
+  ruff
 
 brew tap homebrew/cask-fonts
 
