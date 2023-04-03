@@ -19,5 +19,8 @@ config.color_scheme = "tokyonight_night"
 config.audible_bell = "Disabled"
 config.window_close_confirmation = "NeverPrompt"
 
+config.window_padding = {
+	bottom = 0,
+}
 -- and finally, return the configuration to wezterm
 return config
