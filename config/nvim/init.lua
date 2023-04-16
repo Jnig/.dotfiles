@@ -7,7 +7,6 @@ function map(mode, lhs, rhs, opts)
 end
 
 require("lazy_init")
-require("impatient")
 
 require("core/autocmd")
 require("core/options")
