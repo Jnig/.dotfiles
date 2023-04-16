@@ -8,7 +8,7 @@ configs.setup({
 		"c",
 		"lua",
 		"vim",
-		"help",
+		"vimdoc",
 		"query",
 		"json",
 		"javascript",
