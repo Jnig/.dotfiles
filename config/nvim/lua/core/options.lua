@@ -5,15 +5,13 @@ local options = {
 	smartindent = true,
 	tabstop = 2,
 	softtabstop = 2,
-
 	-- Numbers
 	number = true,
 	numberwidth = 2,
 	ruler = false,
-
 	--- other
 	signcolumn = "yes", -- otherwise text is shifted on every update
-	shortmess = "I", -- ignore intro
+	shortmess = "filnxtToOFsI", -- ignore intro
 	cursorline = true, -- highlight cursor line
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
 	ignorecase = true, -- ignore case in search patterns
