@@ -18,9 +18,3 @@ keymap("n", "<s-tab>", ":bprevious<CR>", opts)
 keymap("n", "<leader>f", ":NvimTreeRefresh<CR>", opts) -- refresh
 keymap("n", "<leader>n", ":NvimTreeFindFile<CR>", opts) -- search file
 keymap("n", "<C-n>", ":Neotree toggle<CR>", opts)
-
--- window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
