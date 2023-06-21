@@ -85,7 +85,8 @@ M.on_attach = function(client, bufnr)
 		end,
 	})
 
-	if client.name == "sumneko_lua" or client.name == "tsserver" then
+	-- formatting is handled by prettier
+	if client.name == "sumneko_lua" or client.name == "volar" then
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end
