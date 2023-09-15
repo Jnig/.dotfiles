@@ -34,6 +34,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    after = "catppuccin",
   },
   {
     "tiagovla/scope.nvim",
@@ -50,7 +51,7 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.1",
+    version = "0.x",
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "nvim-lua/plenary.nvim",

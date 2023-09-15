@@ -1,5 +1,10 @@
 require("catppuccin").setup({
-    flavour = "mocha",
+  integrations = {
+    cmp = true,
+    treesitter = true,
+    neotree = true,
+    telescope = true,
+  },
 })
 
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme("catppuccin")
