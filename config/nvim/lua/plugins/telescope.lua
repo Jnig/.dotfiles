@@ -16,6 +16,17 @@ telescope.setup({
 				["<C-q>"] = actions.send_to_qflist,
 			},
 		},
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+			"--max-filesize",
+			"100K",
+		},
 	},
 })
 require("telescope").load_extension("fzf") -- load fzf native for improved performance
