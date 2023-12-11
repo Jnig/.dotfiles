@@ -59,7 +59,7 @@ export DOCKER_BUILDKIT=1
 export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$HOME/bin/:$PNPM_HOME:$PATH"
+export PATH="$HOME/bin/:$HOME/.local/bin/:$PNPM_HOME:$PATH"
 
 export LC_ALL="en_US.UTF-8"
 
