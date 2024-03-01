@@ -9,6 +9,7 @@ return {
       json = { "prettierd" },
       markdown = { "prettierd" },
       html = { "prettierd" },
+      terraform = { "terraform_fmt" },
     },
     log_level = vim.log.levels.DEBUG,
   },
