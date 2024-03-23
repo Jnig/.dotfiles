@@ -7,6 +7,7 @@ return {
       "shfmt",
       "prettierd",
       "eslint_d",
+      "vue-language-server",
     },
   },
 }
