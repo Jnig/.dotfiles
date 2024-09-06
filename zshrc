@@ -66,8 +66,9 @@ export LC_ALL="en_US.UTF-8"
 
 
 # Add flags to existing aliases.
-alias ls="exa"
+alias ls="eza"
 alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
