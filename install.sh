@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ln -sfn ~/.dotfiles/zshrc ~/.zshrc
+ln -sfn ~/.dotfiles/zimrc ~/.zimrc
 ln -sfn ~/.dotfiles/p10k.zsh ~/.p10k.zsh
 ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sfn ~/.dotfiles/zsh/ssh.zsh ~/.zsh/ssh.zsh
@@ -12,10 +13,9 @@ ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
 ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
 ln -sfn ~/.dotfiles/config/wezterm ~/.config/wezterm
 
-ln -sfn ~/.dotfiles/ssh/rc  ~/.ssh/
+ln -sfn ~/.dotfiles/ssh/rc ~/.ssh/
 
-
-brew install  \
+brew install \
   exa \
   jq \
   fzf \
@@ -47,4 +47,3 @@ brew install --cask \
   obsidian \
   spaceid \
   wezterm
-
