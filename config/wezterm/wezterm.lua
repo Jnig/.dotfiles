@@ -24,6 +24,7 @@ config.window_padding = {
 }
 
 config.use_ime = true
+config.max_fps = 240
 
 -- and finally, return the configuration to wezterm
 return config
