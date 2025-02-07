@@ -12,6 +12,8 @@ ln -sfn ~/.dotfiles/config/karabiner ~/.config/karabiner
 ln -sfn ~/.dotfiles/config/skhd ~/.config/skhd
 ln -sfn ~/.dotfiles/config/yabai ~/.config/yabai
 ln -sfn ~/.dotfiles/config/wezterm ~/.config/wezterm
+ln -sfn ~/.dotfiles/config/aerospace ~/.config/aerospace
+
 
 ln -sfn ~/.dotfiles/ssh/rc ~/.ssh/
 
