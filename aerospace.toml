@@ -24,7 +24,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 30
+accordion-padding = 0
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -141,7 +141,7 @@ alt-shift-semicolon = 'mode service'
 
 cmd-q = 'close'
 cmd-enter = 'exec-and-forget /opt/homebrew/bin/wezterm'
-cmd-e = 'fullscreen'
+cmd-e = 'layout accordion tiles'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
