@@ -6,10 +6,12 @@ return {
     diagnostics = {
       virtual_text = false,
     },
+    servers = {
+      ["*"] = {
+        keys = {
+          { "gl", "<cmd>lua vim.diagnostic.open_float()<CR>" },
+        },
+      },
+    },
   },
-  init = function()
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
-    -- add a keymap
-    keys[#keys + 1] = { "gl", "<cmd>lua vim.diagnostic.open_float()<CR>" }
-  end,
 }
