@@ -139,8 +139,9 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-semicolon = 'mode service'
 
 
-cmd-q = 'close'
-cmd-enter = 'exec-and-forget /opt/homebrew/bin/wezterm'
+#cmd-q = 'close'
+cmd-enter = 'exec-and-forget open -n -a Ghostty'
+
 cmd-e = 'layout accordion tiles'
 
 # 'service' binding mode declaration.
@@ -163,3 +164,9 @@ alt-shift-l = ['join-with right', 'mode main']
 3 = 'main'                  # Non-main monitor in case when there are only two monitors
 4 = 'main'                   # Case insensitive regex substring
 5 = 'main'  # Case insensitive regex match
+
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run= [
+  "layout tiling",
+]

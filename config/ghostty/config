@@ -1,0 +1,7 @@
+shell-integration-features = ssh-terminfo
+window-decoration = false
+window-save-state = never
+clipboard-paste-protection = false
+font-family = FiraCode Nerd Font Mono
+font-size = 13
+confirm-close-surface = false 
