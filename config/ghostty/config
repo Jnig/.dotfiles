@@ -14,8 +14,8 @@ mouse-hide-while-typing = true
 # Appearance
 theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 window-padding-x = 8
-window-padding-y = 6
-window-padding-balance = true
+window-padding-y = 0
+window-padding-balance = false
 window-padding-color = extend
 font-thicken = true
 font-thicken-strength = 150
