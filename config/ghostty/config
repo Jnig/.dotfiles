@@ -10,3 +10,15 @@ keybind = global:cmd+enter=new_window
 quit-after-last-window-closed = false
 initial-window = false
 mouse-hide-while-typing = true
+
+# Appearance
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-padding-color = extend
+font-thicken = true
+adjust-cell-height = 10%
+cursor-style = bar
+cursor-style-blink = true
+unfocused-split-opacity = 0.85
