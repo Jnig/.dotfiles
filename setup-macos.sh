@@ -35,6 +35,19 @@ else
   echo "SSH: added keychain config"
 fi
 
+# Maccy (clipboard manager). Settings only take effect after restarting Maccy.
+defaults write org.p0deje.Maccy historySize -int 999
+defaults write org.p0deje.Maccy popupPosition -string center
+defaults write org.p0deje.Maccy showFooter -bool false
+defaults write org.p0deje.Maccy showSearch -bool true
+defaults write org.p0deje.Maccy searchMode -string fuzzy
+defaults write org.p0deje.Maccy removeFormattingByDefault -bool true   # paste as plain text
+defaults write org.p0deje.Maccy SUEnableAutomaticChecks -bool false     # updated via Homebrew
+defaults write org.p0deje.Maccy KeyboardShortcuts_popup -string '{"carbonKeyCode":9,"carbonModifiers":768}'           # Cmd+Shift+V
+defaults write org.p0deje.Maccy KeyboardShortcuts_pin -string '{"carbonModifiers":2048,"carbonKeyCode":35}'           # Option+P
+defaults write org.p0deje.Maccy KeyboardShortcuts_togglePreview -string '{"carbonKeyCode":49,"carbonModifiers":4096}' # Ctrl+Space
+defaults write org.p0deje.Maccy KeyboardShortcuts_delete -bool false    # no delete shortcut
+
 # Dock: group windows by app in Mission Control
 defaults write com.apple.dock expose-group-apps -bool true
 killall Dock
