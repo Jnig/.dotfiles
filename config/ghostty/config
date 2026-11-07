@@ -10,3 +10,4 @@ keybind = global:cmd+enter=new_window
 quit-after-last-window-closed = false
 initial-window = false
 keybind = cmd+q=close_window
+mouse-hide-while-typing = true
