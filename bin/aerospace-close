@@ -1,0 +1,13 @@
+#!/bin/bash
+# Close the focused window (bound to Cmd+Q in AeroSpace).
+# Ghostty runs without window decorations, so it has no close button for
+# `aerospace close` to press; click its "File > Close Window" menu item instead
+# (a simulated Cmd+Shift+W sometimes got lost while Cmd+Q was still held).
+aerospace=/opt/homebrew/bin/aerospace
+app=$("$aerospace" list-windows --focused --format '%{app-bundle-id}')
+
+if [[ "$app" == "com.mitchellh.ghostty" ]]; then
+  osascript -e 'tell application "System Events" to tell process "Ghostty" to click menu item "Close Window" of menu 1 of menu bar item "File" of menu bar 1' >/dev/null
+else
+  "$aerospace" close
+fi

@@ -143,7 +143,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-semicolon = 'mode service'
 
 
-#cmd-q = 'close'
+cmd-q = 'exec-and-forget ~/.dotfiles/bin/aerospace-close'   # close the focused window (any app) instead of quitting
 
 cmd-e = 'layout accordion tiles'
 
