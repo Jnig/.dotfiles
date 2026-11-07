@@ -30,4 +30,5 @@ if OS.mac?
   cask "karabiner-elements"
   cask "maccy"
   cask "obsidian"
+  cask "time-out"
 end

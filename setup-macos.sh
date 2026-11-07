@@ -25,6 +25,12 @@ add_login_item() {
 # Ghostty runs at login so its global Cmd+Enter keybind is always available
 add_login_item "Ghostty" "/Applications/Ghostty.app"
 
+# Time Out (break reminders, 20-20-20 rule)
+add_login_item "Time Out" "/Applications/Time Out.app"
+
+# Maccy (clipboard manager). AeroSpace handles its own via start-at-login in its config.
+add_login_item "Maccy" "/Applications/Maccy.app"
+
 # SSH: keep key passphrases in the macOS Keychain and load keys automatically
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 touch ~/.ssh/config && chmod 600 ~/.ssh/config
@@ -36,17 +42,22 @@ else
 fi
 
 # Maccy (clipboard manager). Settings only take effect after restarting Maccy.
-defaults write org.p0deje.Maccy historySize -int 999
-defaults write org.p0deje.Maccy popupPosition -string center
-defaults write org.p0deje.Maccy showFooter -bool false
-defaults write org.p0deje.Maccy showSearch -bool true
-defaults write org.p0deje.Maccy searchMode -string fuzzy
-defaults write org.p0deje.Maccy removeFormattingByDefault -bool true   # paste as plain text
-defaults write org.p0deje.Maccy SUEnableAutomaticChecks -bool false     # updated via Homebrew
-defaults write org.p0deje.Maccy KeyboardShortcuts_popup -string '{"carbonKeyCode":9,"carbonModifiers":768}'           # Cmd+Shift+V
-defaults write org.p0deje.Maccy KeyboardShortcuts_pin -string '{"carbonModifiers":2048,"carbonKeyCode":35}'           # Option+P
-defaults write org.p0deje.Maccy KeyboardShortcuts_togglePreview -string '{"carbonKeyCode":49,"carbonModifiers":4096}' # Ctrl+Space
-defaults write org.p0deje.Maccy KeyboardShortcuts_delete -bool false    # no delete shortcut
+# Maccy is sandboxed: its prefs live in ~/Library/Containers, which macOS only lets
+# the terminal write to with Full Disk Access. Without it, warn and skip.
+if ! defaults write org.p0deje.Maccy historySize -int 999 2>/dev/null; then
+  echo "Maccy: cannot write settings (grant your terminal Full Disk Access, then rerun); skipping" >&2
+else
+  defaults write org.p0deje.Maccy popupPosition -string center
+  defaults write org.p0deje.Maccy showFooter -bool false
+  defaults write org.p0deje.Maccy showSearch -bool true
+  defaults write org.p0deje.Maccy searchMode -string fuzzy
+  defaults write org.p0deje.Maccy removeFormattingByDefault -bool true   # paste as plain text
+  defaults write org.p0deje.Maccy SUEnableAutomaticChecks -bool false     # updated via Homebrew
+  defaults write org.p0deje.Maccy KeyboardShortcuts_popup -string '{"carbonKeyCode":9,"carbonModifiers":768}'           # Cmd+Shift+V
+  defaults write org.p0deje.Maccy KeyboardShortcuts_pin -string '{"carbonModifiers":2048,"carbonKeyCode":35}'           # Option+P
+  defaults write org.p0deje.Maccy KeyboardShortcuts_togglePreview -string '{"carbonKeyCode":49,"carbonModifiers":4096}' # Ctrl+Space
+  defaults write org.p0deje.Maccy KeyboardShortcuts_delete -bool false    # no delete shortcut
+fi
 
 # Screenshots: Cmd+U copies a selected area to the clipboard (picked up by Maccy),
 # Cmd+Shift+U saves it as a file. Parameters: ASCII char, key code, modifier mask.
