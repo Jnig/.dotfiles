@@ -48,6 +48,28 @@ defaults write org.p0deje.Maccy KeyboardShortcuts_pin -string '{"carbonModifiers
 defaults write org.p0deje.Maccy KeyboardShortcuts_togglePreview -string '{"carbonKeyCode":49,"carbonModifiers":4096}' # Ctrl+Space
 defaults write org.p0deje.Maccy KeyboardShortcuts_delete -bool false    # no delete shortcut
 
+# Screenshots: Cmd+U copies a selected area to the clipboard (picked up by Maccy),
+# Cmd+Shift+U saves it as a file. Parameters: ASCII char, key code, modifier mask.
+set_hotkey() {
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
+    "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>$2</integer><integer>$3</integer><integer>$4</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+set_hotkey 31 117 32 1048576   # Cmd+U: copy selected area to clipboard
+set_hotkey 30 117 32 1179648   # Cmd+Shift+U: save selected area as file
+defaults write com.apple.screencapture target clipboard
+
+# Free Ctrl+Space (zsh: accept autosuggestion) and Ctrl+Option+Space,
+# which macOS uses by default to switch keyboard input sources
+disable_hotkey() {
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
+    "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>$2</integer><integer>$3</integer><integer>$4</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+disable_hotkey 60 32 49 262144   # Ctrl+Space: select previous input source
+disable_hotkey 61 32 49 786432   # Ctrl+Option+Space: select next input source
+
+# Apply keyboard shortcut changes without logging out
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
 # Dock: group windows by app in Mission Control
 defaults write com.apple.dock expose-group-apps -bool true
 killall Dock
