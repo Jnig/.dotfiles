@@ -9,7 +9,7 @@ ln -sfn ~/.dotfiles/zsh/ssh.zsh ~/.zsh/ssh.zsh
 ln -sfn ~/.dotfiles/config/nvim ~/.config/nvim
 ln -sfn ~/.dotfiles/config/karabiner ~/.config/karabiner
 ln -sfn ~/.dotfiles/config/aerospace ~/.config/aerospace
-ln -s ~/.dotfiles/config/ghostty ~/.config/
+ln -sfn ~/.dotfiles/config/ghostty ~/.config/ghostty
 
 
 
@@ -29,13 +29,10 @@ brew install \
   htop \
   node \
   tmux \
-  yabai \
-  skhd \
   MisterTea/et/et \
   python3 \
   ruff
 
-brew tap homebrew/cask-fonts
 
 brew install --cask \
   ghostty \
@@ -50,4 +47,4 @@ brew install --cask \
 
 
 # settings
-defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+~/.dotfiles/setup-macos.sh

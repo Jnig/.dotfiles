@@ -140,7 +140,6 @@ alt-shift-semicolon = 'mode service'
 
 
 #cmd-q = 'close'
-cmd-enter = 'exec-and-forget open -n -a Ghostty'
 
 cmd-e = 'layout accordion tiles'
 
