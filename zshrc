@@ -78,6 +78,21 @@ alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
 
+# Connect to the dev VM and attach to (or create) its tmux session "main".
+# Reconnects automatically when the connection drops; detach (prefix d) to stop.
+# Usage: dev [session]
+dev() {
+  local session=${1:-main} rc
+  while true; do
+    ssh -t -o ServerAliveInterval=5 -o ServerAliveCountMax=3 -o ConnectTimeout=10 dev \
+      "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH tmux new -A -s $session"
+    rc=$?
+    (( rc == 255 )) || return $rc   # 255 = connection error; anything else = detached
+    print -P "%F{yellow}dev: connection lost, reconnecting in 3s (Ctrl+C to stop)%f"
+    sleep 3
+  done
+}
+
 # ==========================================================================
 # Dotfiles update check
 # ==========================================================================

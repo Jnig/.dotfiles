@@ -27,7 +27,6 @@ if OS.mac?
   cask "font-hack-nerd-font"
   cask "font-iosevka-nerd-font"
   cask "ghostty"
-  cask "google-chrome"
   cask "karabiner-elements"
   cask "maccy"
   cask "obsidian"
