@@ -1,24 +1,24 @@
-# prepare
-```
-git clone git@github.com:Jnig/.dotfiles.git .dotfiles --depth 1
+# Install
+
+Works on macOS and Linux. Needs [Homebrew](https://brew.sh) (on Linux: Linuxbrew in `/home/linuxbrew/.linuxbrew`).
+
+```sh
+git clone git@github.com:Jnig/.dotfiles.git ~/.dotfiles
+~/.dotfiles/install.sh
 ```
 
-# fonts for powerlevel10k
+`install.sh` can be run again at any time. It:
 
+- links the configs into `~` and `~/.config` (Ghostty, AeroSpace and Karabiner only on macOS)
+- installs packages from `Brewfile` (macOS apps only on macOS)
+- on macOS, runs `setup-macos.sh` (login items, SSH keychain, Dock)
 
-```
-wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-sudo mv *.ttf /usr/share/fonts/
-```
+The first new shell installs zinit and the zsh plugins.
 
-# links
-```
-ln -s ~/.dotfiles/nvim/ ~/.config/nvim
-ln -s ~/.dotfiles/zshrc ~/.zshrc
-ln -s ~/.dotfiles/p10k.zsh ~/.p10k.zsh
-ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/config/ghostty ~/.config/
-```
+## Updating
+
+New shells say when the dotfiles are behind GitHub, have unpushed commits or uncommitted changes. Pull with `dotup`.
+
+## Machine-specific settings
+
+Put anything machine-specific or secret in `~/.zshrc.local` (not in git).

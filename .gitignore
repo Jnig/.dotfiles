@@ -1,5 +1,4 @@
 is_work
 *.swp
 packer_compiled.lua
-lazy-lock.json
 config/nvim/lazyvim.json
