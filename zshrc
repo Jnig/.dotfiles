@@ -82,7 +82,7 @@ alias tn="t new -t"
 # Dotfiles update check
 # ==========================================================================
 # Fetches ~/.dotfiles in the background (at most every 6h) and prints a notice
-# right after the first prompt when there are commits to pull or push.
+# right after the first prompt when there are commits to pull/push or uncommitted changes.
 alias dotup='git -C ${DOTFILES:-$HOME/.dotfiles} pull --ff-only'
 
 _dotfiles_check() {
@@ -98,13 +98,16 @@ _dotfiles_check() {
   fi
 
   # Compare with the last fetched state (no network)
-  local counts behind ahead
-  counts=$(git -C $dir rev-list --left-right --count HEAD...@{u} 2>/dev/null) || return
-  read ahead behind <<< $counts
-  (( behind || ahead )) || return
+  local counts behind=0 ahead=0 dirty
+  counts=$(git -C $dir rev-list --left-right --count HEAD...@{u} 2>/dev/null) \
+    && read ahead behind <<< $counts
+  local -a changes=(${(f)"$(git -C $dir status --porcelain 2>/dev/null)"})
+  dirty=$#changes
+  (( behind || ahead || dirty )) || return
   zle && zle -I   # print above the prompt without garbling it
   (( behind )) && print -P "%F{yellow}dotfiles: $behind commit(s) behind, run %Bdotup%b%f"
   (( ahead ))  && print -P "%F{yellow}dotfiles: $ahead commit(s) not pushed%f"
+  (( dirty ))  && print -P "%F{yellow}dotfiles: $dirty uncommitted change(s)%f"
 }
 # Run 1s after startup, once the prompt is up (avoids p10k instant-prompt warnings)
 zmodload zsh/sched && sched +1 _dotfiles_check
