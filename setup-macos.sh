@@ -24,7 +24,16 @@ add_login_item() {
 
 # Ghostty runs at login so its global Cmd+Enter keybind is always available
 add_login_item "Ghostty" "/Applications/Ghostty.app"
-add_login_item "AeroSpace" "/Applications/AeroSpace.app"
+
+# SSH: keep key passphrases in the macOS Keychain and load keys automatically
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+touch ~/.ssh/config && chmod 600 ~/.ssh/config
+if grep -qi '^\s*UseKeychain' ~/.ssh/config; then
+  echo "SSH: keychain config already present"
+else
+  printf '\nHost *\n  AddKeysToAgent yes\n  UseKeychain yes\n' >> ~/.ssh/config
+  echo "SSH: added keychain config"
+fi
 
 # Dock: group windows by app in Mission Control
 defaults write com.apple.dock expose-group-apps -bool true

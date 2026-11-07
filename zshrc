@@ -1,172 +1,113 @@
-if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-  export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-  export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-  export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-  [ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
-  export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
-  [ -z "${XDG_DATA_DIRS-}" ] || export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:${XDG_DATA_DIRS-}";
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# ==========================================================================
+# Powerlevel10k instant prompt (keep at the top; nothing that prints above it)
+# ==========================================================================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
-
-# -----------------
-# Zsh configuration
-# -----------------
-
-#
-# History
-#
-
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
-
-#
-# Input/output
-#
-
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
-
-# Prompt for spelling correction of commands.
-#setopt CORRECT
-
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# -----------------
-# Zim configuration
-# -----------------
-
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
-
-# --------------------
-# Module configuration
-# --------------------
-
-#
-# git
-#
-
-# Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
-
-#
-# input
-#
-
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
-
-#
-# zsh-autosuggestions
-#
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-#
-# zsh-syntax-highlighting
-#
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
-
-# ------------------
-# Initialize modules
-# ------------------
-
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
+# ==========================================================================
+# Environment
+# ==========================================================================
+# Linuxbrew (macOS Homebrew is set up in ~/.zprofile)
+if [[ -d /home/linuxbrew/.linuxbrew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
 
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
-
-#
-# zsh-history-substring-search
-#
-
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
-# }}} End configuration added by Zim install
-
-
-
-bindkey '^ ' autosuggest-accept
-export _JAVA_AWT_WM_NONREPARENTING=1
 export XDG_CONFIG_HOME="$HOME/.config"
-export DOCKER_BUILDKIT=1
-export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$HOME/bin/:$HOME/.local/bin/:$PNPM_HOME:$PATH"
 export LC_ALL="en_US.UTF-8"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export DOCKER_BUILDKIT=1
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$HOME/bin:$HOME/.local/bin:$PNPM_HOME:$PATH"
+[[ -d /opt/nvim-linux-x86_64/bin ]] && export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 
-# better visible background color
-export GREP_COLOR='1;35;40'
+# ==========================================================================
+# History & options
+# ==========================================================================
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
 
-# Add flags to existing aliases.
+bindkey -e
+WORDCHARS=${WORDCHARS//[\/]}   # word jumps stop at /
+
+# ==========================================================================
+# Zinit (plugin manager), installs itself on first run
+# ==========================================================================
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [[ ! -d "$ZINIT_HOME" ]]; then
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "$ZINIT_HOME/zinit.zsh"
+
+# ==========================================================================
+# Prompt
+# ==========================================================================
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# ==========================================================================
+# Plugins (turbo mode: loaded right after the prompt appears)
+# ==========================================================================
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  atload"bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down; bindkey '^P' history-substring-search-up; bindkey '^N' history-substring-search-down" \
+    zsh-users/zsh-history-substring-search \
+  atload"_zsh_autosuggest_start; bindkey '^ ' autosuggest-accept" \
+    zsh-users/zsh-autosuggestions \
+  blockf atpull"zinit creinstall -q ." \
+    zsh-users/zsh-completions
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select
+
+# fzf: Ctrl+R history, Ctrl+T files, Alt+C cd
+(( $+commands[fzf] )) && source <(fzf --zsh)
+
+# ==========================================================================
+# Aliases
+# ==========================================================================
 alias ls="eza"
 alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
 
+# ==========================================================================
+# Dotfiles update check
+# ==========================================================================
+# Fetches ~/.dotfiles in the background (at most every 6h) and prints a notice
+# right after the first prompt when there are commits to pull or push.
+alias dotup='git -C ${DOTFILES:-$HOME/.dotfiles} pull --ff-only'
 
+_dotfiles_check() {
+  local dir=${DOTFILES:-$HOME/.dotfiles} stamp=${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles-fetch
+  [[ -d $dir/.git ]] || return
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  # Background fetch; never prompt for passwords
+  local -a stale=($stamp(N.mh+6))
+  if [[ ! -e $stamp || -n $stale ]]; then
+    mkdir -p ${stamp:h} && touch $stamp
+    ( GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="ssh -o BatchMode=yes" \
+        git -C $dir fetch -q &>/dev/null ) &!
+  fi
+
+  # Compare with the last fetched state (no network)
+  local counts behind ahead
+  counts=$(git -C $dir rev-list --left-right --count HEAD...@{u} 2>/dev/null) || return
+  read ahead behind <<< $counts
+  (( behind || ahead )) || return
+  zle && zle -I   # print above the prompt without garbling it
+  (( behind )) && print -P "%F{yellow}dotfiles: $behind commit(s) behind, run %Bdotup%b%f"
+  (( ahead ))  && print -P "%F{yellow}dotfiles: $ahead commit(s) not pushed%f"
+}
+# Run 1s after startup, once the prompt is up (avoids p10k instant-prompt warnings)
+zmodload zsh/sched && sched +1 _dotfiles_check
+
+# Machine-specific settings and secrets (not in git)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
