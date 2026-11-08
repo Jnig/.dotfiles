@@ -1,4 +1,4 @@
-shell-integration-features = ssh-env
+shell-integration-features = ssh-env,no-cursor
 window-decoration = false
 window-save-state = never
 clipboard-paste-protection = false
@@ -20,6 +20,6 @@ window-padding-color = extend
 font-thicken = true
 font-thicken-strength = 150
 adjust-cell-height = 15%
-cursor-style = bar
+cursor-style = block
 cursor-style-blink = true
 unfocused-split-opacity = 0.85
