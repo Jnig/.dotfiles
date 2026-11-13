@@ -2,5 +2,6 @@
   "attribution": {
     "commit": ""
   },
+  "autoMemoryEnabled": false,
   "theme": "auto"
 }
