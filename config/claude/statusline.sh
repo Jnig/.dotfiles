@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Claude Code status line: 5-hour and weekly plan usage with reset times.
+# Claude Code status line: model, context used, and 5-hour and weekly plan
+# usage with reset times.
 # Claude Code pipes session JSON on stdin; rate_limits is only present for
 # Claude.ai subscribers, after the first API response.
-# Example: 5h 23% ↻14:30 │ week 41% ↻Mon 09:00
+# Example: Opus 5.5 │ ctx 37% │ 5h 23% ↻14:30 │ week 41% ↻Mon 09:00
 
 input=$(cat)
 
@@ -26,11 +27,20 @@ window() {  # label, jq path, date format for the reset time
   printf '%s %s%s%%\033[0m \033[2m↻%s\033[0m' "$1" "$(color "$pct")" "$pct" "$(fmt "$reset" "$3")"
 }
 
-five=$(window 5h '.rate_limits.five_hour' '%H:%M')
-week=$(window week '.rate_limits.seven_day' '%a %H:%M')
+sep=$'\033[2m │ \033[0m'
+parts=()
 
-if [[ -n $five && -n $week ]]; then
-  printf '%s \033[2m│\033[0m %s' "$five" "$week"
-else
-  printf '%s%s' "$five" "$week"
-fi
+model=$(jq -r '.model.display_name // empty' <<<"$input")
+[[ -n $model ]] && parts+=("$model")
+
+ctx=$(jq -r '.context_window.used_percentage // empty | floor' <<<"$input")
+[[ -n $ctx ]] && parts+=("ctx $(color "$ctx")$ctx%"$'\033[0m')
+
+five=$(window 5h '.rate_limits.five_hour' '%H:%M')
+[[ -n $five ]] && parts+=("$five")
+week=$(window week '.rate_limits.seven_day' '%a %H:%M')
+[[ -n $week ]] && parts+=("$week")
+
+out=""
+for p in "${parts[@]}"; do out+="${out:+$sep}$p"; done
+printf '%s' "$out"
