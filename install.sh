@@ -26,6 +26,14 @@ fi
 # Packages (Brewfile skips the macOS apps on Linux)
 if command -v brew >/dev/null; then
   brew bundle --file "$DOTFILES/Brewfile"
+
+  # Helm plugins (not in Homebrew). helm diff is needed by helmfile diff/apply.
+  # Helm 4 verifies plugin signatures by default; helm-diff is installed from source.
+  if helm plugin list | grep -q '^diff\b'; then
+    echo "Helm plugin: diff already installed"
+  else
+    helm plugin install https://github.com/databus23/helm-diff --verify=false
+  fi
 else
   echo "Homebrew not found, skipping packages. Install it from https://brew.sh and run this again." >&2
 fi

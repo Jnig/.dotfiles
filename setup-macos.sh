@@ -78,7 +78,27 @@ disable_hotkey() {
 disable_hotkey 60 32 49 262144   # Ctrl+Space: select previous input source
 disable_hotkey 61 32 49 786432   # Ctrl+Option+Space: select next input source
 
-# Apply keyboard shortcut changes without logging out
+# Keyboard: fast key repeat for Neovim (fastest values the System Settings sliders allow;
+# units of 15 ms). Holding a key repeats it instead of showing the accent picker.
+defaults write -g KeyRepeat -int 2          # 30 ms between repeats (default 6 = 90 ms)
+defaults write -g InitialKeyRepeat -int 15  # 225 ms before repeating starts (default 25 = 375 ms)
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Trackpad/mouse: natural scrolling off
+defaults write -g com.apple.swipescrolldirection -bool false
+
+# Sound: no user interface sounds
+defaults write -g com.apple.sound.uiaudio.enabled -int 0
+
+# Sound: no chime on startup (NVRAM, needs sudo; only prompts when not yet set)
+if [[ "$(nvram StartupMute 2>/dev/null | awk '{print $2}')" == "%01" ]]; then
+  echo "Startup sound: already muted"
+else
+  sudo nvram StartupMute=%01
+  echo "Startup sound: muted"
+fi
+
+# Apply keyboard shortcut and preference changes without logging out
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
 # Dock: group windows by app in Mission Control

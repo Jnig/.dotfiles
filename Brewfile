@@ -7,8 +7,12 @@ brew "curl"
 brew "eza"
 brew "fzf"
 brew "git"
+brew "helm"
+brew "helmfile"
 brew "htop"
 brew "jq"
+brew "kubectx"         # also installs kubens
+brew "kubernetes-cli"  # kubectl
 brew "neovim"
 brew "node"
 brew "python"
