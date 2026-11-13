@@ -5,7 +5,8 @@
   "autoMemoryEnabled": false,
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "DISABLE_TELEMETRY": "1"
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_GROWTHBOOK": "1"
   },
   "theme": "auto"
 }
