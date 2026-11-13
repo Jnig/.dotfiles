@@ -15,6 +15,7 @@ link "$DOTFILES/zshrc"          ~/.zshrc
 link "$DOTFILES/p10k.zsh"       ~/.p10k.zsh
 link "$DOTFILES/tmux/tmux.conf" ~/.tmux.conf
 link "$DOTFILES/config/nvim"    ~/.config/nvim
+link "$DOTFILES/config/claude/settings.json" ~/.claude/settings.json
 
 # macOS only
 if [[ "$(uname)" == "Darwin" ]]; then
