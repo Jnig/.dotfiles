@@ -81,6 +81,7 @@ alias t="tmux"
 alias ta="t a -t"
 alias tls="t ls"
 alias tn="t new -t"
+alias c="claude --dangerously-skip-permissions"
 
 # Connect to the dev VM and attach to (or create) its tmux session "main".
 # Reconnects automatically when the connection drops; detach (prefix d) to stop.

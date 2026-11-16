@@ -5,6 +5,7 @@
 brew "cmake"
 brew "curl"
 brew "eza"
+brew "fd"
 brew "fzf"
 brew "git"
 brew "helm"
@@ -20,6 +21,7 @@ brew "ripgrep"
 brew "ruff"
 brew "stylua"
 brew "tmux"
+brew "universal-ctags"
 brew "wget"
 
 # macOS apps
