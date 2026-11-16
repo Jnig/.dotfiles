@@ -22,9 +22,18 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$HOME/bin:$HOME/.local/bin:$PNPM_HOME:$PATH"
 [[ -d /opt/nvim-linux-x86_64/bin ]] && export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 
-# Inside tmux, use the stable agent symlink that `dev` refreshes on every connect,
-# so SSH agent forwarding keeps working after reconnects.
-[[ -n $TMUX && -L $HOME/.ssh/agent.sock ]] && export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+# Inside tmux on a remote machine, use a stable agent symlink. Each SSH connection
+# has its own forwarded agent socket that disappears when it closes, so before
+# every command repoint the symlink to the newest live socket if it went stale.
+if [[ -n $TMUX && -n $SSH_CONNECTION ]]; then
+  export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+  _fix_agent_sock() {
+    [[ -S $SSH_AUTH_SOCK ]] && return
+    local socks=( /tmp/ssh-*/agent.*(N=om) )
+    (( $#socks )) && ln -sfn $socks[1] $SSH_AUTH_SOCK
+  }
+  preexec_functions+=(_fix_agent_sock)
+fi
 
 # ==========================================================================
 # History & options
@@ -87,13 +96,9 @@ alias c="claude --dangerously-skip-permissions"
 # Reconnects automatically when the connection drops; detach (prefix d) to stop.
 # Usage: dev [session]
 dev() {
-  local session=${1:-main} rc
-  while true; do
-    ssh -t -o ServerAliveInterval=5 -o ServerAliveCountMax=3 -o ConnectTimeout=10 dev \
-      "[ -S \"\$SSH_AUTH_SOCK\" ] && ln -sfn \"\$SSH_AUTH_SOCK\" ~/.ssh/agent.sock;
-       PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH tmux new -A -s $session"
-    rc=$?
-    (( rc == 255 )) || return $rc   # 255 = connection error; anything else = detached
+  # Exit code 255 = connection error -> reconnect; anything else = detached -> stop.
+  while ssh -t -o ServerAliveInterval=5 -o ServerAliveCountMax=3 -o ConnectTimeout=10 dev \
+    "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH tmux new -A -s ${1:-main}"; (( $? == 255 )); do
     print -P "%F{yellow}dev: connection lost, reconnecting in 3s (Ctrl+C to stop)%f"
     sleep 3
   done
