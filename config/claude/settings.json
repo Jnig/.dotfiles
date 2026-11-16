@@ -13,6 +13,7 @@
     "command": "~/.dotfiles/config/claude/statusline.sh"
   },
   "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "skipDangerousModePermissionPrompt": true
+  "model": "claude-fable-5-1[1m]"
 }
