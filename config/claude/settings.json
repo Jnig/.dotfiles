@@ -8,12 +8,12 @@
   "attribution": {
     "commit": ""
   },
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.dotfiles/config/claude/statusline.sh"
   },
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
-  "theme": "auto",
-  "model": "claude-fable-5-1[1m]"
+  "theme": "auto"
 }
