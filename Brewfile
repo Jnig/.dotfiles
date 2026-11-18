@@ -15,6 +15,7 @@ brew "jq"
 brew "kubectx"         # also installs kubens
 brew "kubernetes-cli"  # kubectl
 brew "neovim"
+brew "tree-sitter-cli" # required by nvim-treesitter main branch
 brew "node"
 brew "python"
 brew "ripgrep"
