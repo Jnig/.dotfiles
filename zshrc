@@ -130,7 +130,10 @@ _dotfiles_check() {
   local -a changes=(${(f)"$(git -C $dir status --porcelain 2>/dev/null)"})
   dirty=$#changes
   (( behind || ahead || dirty )) || return
-  zle && zle -I   # print above the prompt without garbling it
+  # If startup took over 1s, this runs before the first prompt is up, and p10k reports any
+  # output as console output during initialization. Wait until the line editor is active.
+  if ! zle; then sched +1 _dotfiles_check; return; fi
+  zle -I   # print above the prompt without garbling it
   (( behind )) && print -P "%F{yellow}dotfiles: $behind commit(s) behind, run %Bdotup%b%f"
   (( ahead ))  && print -P "%F{yellow}dotfiles: $ahead commit(s) not pushed%f"
   (( dirty ))  && print -P "%F{yellow}dotfiles: $dirty uncommitted change(s)%f"
