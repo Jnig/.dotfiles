@@ -4,6 +4,23 @@ vim.o.number = true -- the cursor line shows its absolute line number, for jumps
 vim.o.relativenumber = true -- other lines show their distance from the cursor, for motions like 12j
 vim.o.showmode = false -- lualine already shows the mode, so hide "-- INSERT --"
 vim.o.laststatus = 3 -- one status bar across the screen instead of one per window
+vim.o.clipboard = "unnamedplus" -- yank, delete and put use the system clipboard
+
+-- Over SSH there is no local clipboard tool, so copy with OSC 52: the terminal (through tmux,
+-- which has set-clipboard on) puts the text on the local machine's clipboard. Paste returns the
+-- last yank instead of asking the terminal, which would prompt or hang; to paste text copied
+-- outside Neovim, use the terminal's paste (Cmd+V).
+if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+  end
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+end
 
 -- reload files changed outside Neovim (e.g. by Claude Code) when switching panes or buffers,
 -- or after the cursor rests for 'updatetime'; not in insert mode, where a conflict prompt would
